@@ -1,0 +1,14 @@
+# Core packages
+gymnasium
+panda-gym
+stable-baselines3
+langchain
+transformers
+
+# PyTorch packages (install with CUDA support)
+# Install these with: pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+# Adjust 'cu121' to your CUDA version (e.g., cu118 for older versions)
+# Check your CUDA version with: nvidia-smi
+torch
+torchvision
+torchaudio 
