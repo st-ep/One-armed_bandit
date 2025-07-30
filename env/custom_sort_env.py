@@ -119,12 +119,13 @@ class CustomSortTask(Task):
 
     def compute_reward(self, achieved_goal: np.ndarray, desired_goal: np.ndarray, info: dict) -> float:
         """Compute reward based on distance to goal.
-        
+    
         Note: Using red_cube position as achieved_goal for this prototype.
         In a full sorting task, this could be extended to track multiple 
         objects or sorting criteria (e.g., red cubes to red zone).
         """
         distance = np.linalg.norm(achieved_goal - desired_goal)
+        distance = np.clip(distance, 0.0, 1.0)  # Clip to bound rewards and prevent divergence
         
         # Dense reward: negative distance
         reward = -distance
@@ -132,7 +133,7 @@ class CustomSortTask(Task):
         # Success bonus
         if distance < self.distance_threshold:
             reward += 10.0
-            
+        
         return reward
 
     def is_success(self, achieved_goal: np.ndarray, desired_goal: np.ndarray) -> bool:
